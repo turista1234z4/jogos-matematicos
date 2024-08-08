@@ -1,0 +1,41 @@
+.container {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container button {
+    max-width: 30%;
+}
+
+.container input {
+    height: 50px;
+}
+
+#coluna_tempo {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    text-align: center;
+}
+
+#cronometro h1 {
+    font-size: 2em;
+}
+
+#tempoFinal {
+    font-size: 1.5em;
+    margin-top: 10px;
+}
+
+#alfabeto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#respostaUsuario{
+    display: none;
+}

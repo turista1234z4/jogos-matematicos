@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criptograma Matemático</title>
+    <link rel="stylesheet" href="cripto.css">
+    <script>
+        const palavras = ["MATEMATICA", "LIVRO", "AULA", "LOGICA", "ESTUDO", "SAPATO", "MESA", "QUADRADO"];
+        let tempos = []; // Array para armazenar os tempos
+        let palavraAtual = ""; // Armazena a palavra atual
+        let tempoInicial = 60; // Tempo padrão em segundos (1 minuto)
+
+        function definirTempo() {
+            const tempoEscolhido = document.getElementById("tempoEscolhido").value;
+            tempoInicial = parseInt(tempoEscolhido) * 60; // Converter para segundos
+            iniciarTimer(); // Inicia o timer após a escolha do tempo
+        }
+
+        function obterPalavraAleatoria() {
+            return palavras[Math.floor(Math.random() * palavras.length)];
+        }
+
+        function codificarPalavra(palavra) {
+            const equacoes = {
+                A: "1 + 0", B: "1 + 1", C: "1 + 2", D: "1 + 3", E: "1 + 4", F: "1 + 5", G: "1 + 6",
+                H: "1 + 7", I: "1 + 8", J: "1 + 9", K: "1 + 10", L: "1 + 11", M: "1 + 12", N: "1 + 13",
+                O: "1 + 14", P: "1 + 15", Q: "1 + 16", R: "1 + 17", S: "1 + 18", T: "1 + 19", U: "1 + 20",
+                V: "1 + 21", W: "1 + 22", X: "1 + 23", Y: "1 + 24", Z: "1 + 25"
+            };
+            return palavra.split("").map(letra => equacoes[letra]);
+        }
+
+        function verificarResposta() {
+            const respostaUsuario = document.getElementById("respostaUsuario").value.toUpperCase();
+            const palavraOriginal = document.getElementById("palavraOriginal").value;
+            const resultado = respostaUsuario === palavraOriginal ? "Correto!" : "Incorreto. Tente novamente.";
+            document.getElementById("resultado").innerText = resultado;
+
+            if (respostaUsuario === palavraOriginal) {
+                salvarTempo(); // Salva o tempo no histórico
+                exibirHistorico(); // Exibe o histórico de tempos
+                iniciar(); // Gera uma nova palavra automaticamente
+            }
+        }
+
+        function iniciar() {
+            const palavra = obterPalavraAleatoria();
+            palavraAtual = palavra; // Atualiza a palavra atual
+            const palavraCodificada = codificarPalavra(palavra);
+            document.getElementById("palavraCodificada").innerText = palavraCodificada.join(" | ");
+            document.getElementById("palavraOriginal").value = palavra;
+            document.getElementById("txt").style.display = "block";
+            document.getElementById("respostaUsuario").style.display = "block";
+            document.getElementById("respostaUsuario").value = ""; // Limpa o campo de resposta
+            
+            const nivel = document.getElementById("dificuldade");
+            var pontuacao = document.getElementById('pontos');
+
+            if (palavra.length <= 4) {
+                nivel.innerHTML = "<strong><h2>Palavra de nível FÁCIL</h2></strong>";
+                nivel.style.color = "#018d09";
+                
+            } else if (palavra.length <= 7) {
+                nivel.innerHTML = "<strong><h2>Palavra de nível MÉDIO</h2></strong>";
+                nivel.style.color = "blue";
+            } else if (palavra.length <= 12) {
+                nivel.innerHTML = "<strong><h2>Palavra de nível DIFÍCIL</h2></strong>";
+                nivel.style.color = "orange";
+            } else {
+                nivel.innerHTML = "<strong><h2>Palavra de nível IMPOSSÍVEL</h2></strong>";
+                nivel.style.color = "red";
+            }
+        }
+
+        // Timer regressivo
+        let intervalo;
+        let tempoRestante;
+
+        function formatarTempo(segundos) {
+            const minutos = Math.floor(segundos / 60);
+            const segs = segundos % 60;
+            return `${minutos.toString().padStart(2, '0')}:${segs.toString().padStart(2, '0')}`;
+        }
+
+        function atualizarExibicaoTimer() {
+            document.getElementById('cronometro').textContent = formatarTempo(tempoRestante);
+        }
+
+        function iniciarTimer() {
+            if (intervalo) {
+                clearInterval(intervalo); // Para o timer anterior, se existir
+            }
+            tempoRestante = tempoInicial;
+            atualizarExibicaoTimer();
+            iniciar(); // Gera a primeira palavra
+
+            intervalo = setInterval(() => {
+                tempoRestante--;
+                atualizarExibicaoTimer();
+
+                if (tempoRestante <= 0) {
+                    clearInterval(intervalo);
+                    document.getElementById("resultado").innerText = "Tempo esgotado!";
+                    document.getElementById("respostaUsuario").disabled = true;
+                }
+            }, 1000);
+        }
+
+        function salvarTempo() {
+            const tempoDecorrido = tempoInicial - tempoRestante;
+            tempos.push({ palavra: palavraAtual, tempo: formatarTempo(tempoDecorrido) });
+        }
+
+        function exibirHistorico() {
+            const historicoDiv = document.getElementById('historicoTempos');
+            historicoDiv.innerHTML = "<h3>Histórico de Tempos:</h3>";
+            tempos.forEach((item, index) => {
+                historicoDiv.innerHTML += `<p>Palavra ${index + 1}: ${item.palavra} - Tempo: ${item.tempo}</p>`;
+            });
+        }
+
+        // Adiciona o evento para verificar a resposta quando a tecla Enter for pressionada
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("respostaUsuario").addEventListener("keyup", function (event) {
+                if (event.key === "Enter") {
+                    verificarResposta();
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="pontos">
+
+    </div>
+
+
+    <div id="coluna_tempo">
+        <div id="cronometro"><h1>00:00</h1></div><br>
+        <div id="historicoTempos"></div> 
+    </div>
+
+    <div class="container">
+        <h1>Criptograma Matemático</h1>
+        <h3>Escolha o tempo para jogar:</h3>
+        <select id="tempoEscolhido">
+            <option value="1">1 minuto</option>
+            <option value="3">3 minutos</option>
+            <option value="5">5 minutos</option>
+        </select>
+        <button onclick="definirTempo()" id="botaoIniciar">Iniciar</button>
+        <p id="dificuldade"></p>
+        <h4 id="txt" style="display: none;">Decifre a palavra:</h4>
+        <h2 id="palavraCodificada"></h2>
+        <input type="hidden" id="palavraOriginal">
+        <input type="text" id="respostaUsuario" placeholder="Digite a palavra decodificada"><br>
+        <p id="resultado"></p>
+    </div>
+
+    <div id="alfabeto">
+        <strong>
+            <h2>A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</h2>
+        </strong>
+    </div>
+</body>
+
+</html>

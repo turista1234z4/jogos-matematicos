@@ -1,0 +1,168 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+#map {
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem;
+}
+
+.location {
+    width: 50px;
+    height: 50px;
+    background-color: #284ea7;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.location.correct {
+    background-color:  #4CAF50; /* Verde */
+}
+
+#question-area {
+    text-align: center;
+    margin: 2rem;
+}
+
+#feedback {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #d9534f;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    left: 0;
+}
+
+#congratulations {
+    display: none;
+    text-align: center;
+    font-size: 2rem;
+    color: #28a745; /* Verde */
+}
+#message {
+
+    color: #28a745; /* Verde */
+}
+.container {
+    max-width: 700px;
+    margin: auto;
+    background: var(--container-background-light);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    margin-top: 20px;
+    margin-bottom: 15%;
+    text-align: center;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+input[type="text"], button {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Hub */
+.hub {
+    width: 100%;
+
+    background-color: #1f1f1f; /* Fundo escuro do hub */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra leve para destaque */
+
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    /* Adiciona um espaço de reserva para não sobrepor o conteúdo abaixo */
+    margin-bottom: 20px;
+
+    padding: 20px 0;
+    text-align: center;
+
+    position: relative;
+}
+
+.hub h1 {
+    color: #ffffff; /* Cor do título */
+    margin: 0;
+    font-size: 24px;
+}
+
+nav {
+    margin-top: 10px;
+}
+
+nav button {
+    background-color: #333; /* Cor de fundo dos botões */
+    color: #e0e0e0; /* Cor do texto dos botões */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+nav button:hover {
+    background-color: #555; /* Cor ao passar o mouse */
+}
+
+label {
+    color: #e0e0e0; /* Cor do texto do switch */
+    margin-left: 10px;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* Ajuste o layout responsivo conforme necessário */
+@media (max-width: 768px) {
+    .hub {
+        padding: 10px;
+    }
+    nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    nav button {
+        margin: 5px 0;
+    }
+}
