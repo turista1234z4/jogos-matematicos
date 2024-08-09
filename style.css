@@ -1,14 +1,78 @@
+:root {
+    --background-color: #ffffff; /* Fundo mais claro e limpo */
+    --text-color: #222222; /* Texto um pouco mais escuro para contraste */
+    --header-background: #3a7ca5; /* Um azul suave para o cabeçalho */
+    --header-text-color: #ffffff; /* Texto branco para destacar no cabeçalho */
+    --location-background: #ff5722; /* Laranja vibrante para os botões de localização */
+    --footer-background: #2c3e50; /* Azul profundo para o rodapé */
+    --footer-text-color: #ecf0f1; /* Texto claro no rodapé */
+    --button-background: #2980b9; /* Azul vibrante para botões */
+    --button-hover-background: #3498db; /* Azul claro ao passar o mouse */
+    --hub-background-color: #f0f0f0;
+    --hub-text-color: #333333;
+
+    --nav-button-background: #ffffff;
+    --nav-button-text-color: #333333;
+    --nav-button-hover-background: #dddddd;
+
+    --label-text-color: #333333;
+}
+
+
+.dark-theme {
+    --background-color: #1e272e; /* Fundo escuro suave */
+    --text-color: #dcdde1; /* Texto claro com contraste */
+    --header-background: #2f3640; /* Fundo do cabeçalho mais escuro */
+    --header-text-color: #f5f6fa; /* Texto claro para cabeçalho */
+    --location-background: #e74c3c; /* Vermelho vibrante para botões de localização */
+    --footer-background: #2c3e50; /* Azul profundo para o rodapé, consistente com o modo claro */
+    --footer-text-color: #dcdde1; /* Texto claro no rodapé */
+    --button-background: #8e44ad; /* Roxo escuro para botões */
+    --button-hover-background: #9b59b6; /* Roxo mais claro ao passar o mouse */
+    --hub-background-color: #1f1f1f;
+    --hub-text-color: #ffffff;
+
+    --nav-button-background: #333333;
+    --nav-button-text-color: #e0e0e0;
+    --nav-button-hover-background: #555555;
+
+    --label-text-color: #e0e0e0;
+}
+
+.colorblind-theme {
+    --background-color: #f5f5f5; /* Fundo neutro e claro */
+    --text-color: #2e2e2e; /* Texto escuro e de alto contraste */
+    --header-background: #0072b2; /* Azul vibrante, perceptível por todas as formas de daltonismo */
+    --header-text-color: #ffffff; /* Texto branco para contraste */
+    --location-background: #d55e00; /* Laranja escuro, perceptível para a maioria das formas de daltonismo */
+    --footer-background: #0072b2; /* Azul vibrante, consistente com o cabeçalho */
+    --footer-text-color: #ffffff; /* Texto branco para contraste */
+    --button-background: #e69f00; /* Amarelo vibrante, perceptível para a maioria das formas de daltonismo */
+    --button-hover-background: #f0e442; /* Amarelo claro, perceptível e distinto */
+    --focus-outline-color: #cc79a7; /* Rosa escuro, para alto contraste em torno de elementos focados */
+    --hub-background-color: #0072b2; /* Azul vibrante */
+    --hub-text-color: #ffffff;
+
+    --nav-button-background: #e69f00; /* Amarelo alaranjado */
+    --nav-button-text-color: #333333;
+    --nav-button-hover-background: #f0e442; /* Amarelo claro */
+
+    --label-text-color: #333333;
+}
+
+
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 
 header {
-    background-color: #4CAF50;
-    color: white;
+    background-color: var(--header-background);
+    color: var(--header-text-color);
     padding: 1rem;
     text-align: center;
 }
@@ -22,7 +86,7 @@ header {
 .location {
     width: 50px;
     height: 50px;
-    background-color: #284ea7;
+    background-color: var(--location-background);
     color: white;
     display: flex;
     align-items: center;
@@ -48,7 +112,9 @@ header {
 }
 
 footer {
-    background-color: #333;
+    background-color: var(--footer-background);
+    color: var(--footer-text-color);
+
     color: #fff;
     padding: 20px 0;
     text-align: center;
@@ -81,7 +147,7 @@ footer {
 }
 
 button {
-    background-color: #007bff;
+    background-color: var(--button-background);
     color: white;
     border: none;
     cursor: pointer;
@@ -89,7 +155,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: var(--button-hover-background);
 }
 input[type="text"], button {
     padding: 10px;
@@ -102,13 +168,12 @@ input[type="text"], button {
 .hub {
     width: 100%;
 
-    background-color: #1f1f1f; /* Fundo escuro do hub */
+    background-color: var(--hub-background-color); /* Cor de fundo do hub */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra leve para destaque */
 
     top: 0;
     left: 0;
     z-index: 1000;
-    /* Adiciona um espaço de reserva para não sobrepor o conteúdo abaixo */
     margin-bottom: 20px;
 
     padding: 20px 0;
@@ -118,7 +183,7 @@ input[type="text"], button {
 }
 
 .hub h1 {
-    color: #ffffff; /* Cor do título */
+    color: var(--hub-text-color); /* Cor do título */
     margin: 0;
     font-size: 24px;
 }
@@ -128,8 +193,8 @@ nav {
 }
 
 nav button {
-    background-color: #333; /* Cor de fundo dos botões */
-    color: #e0e0e0; /* Cor do texto dos botões */
+    background-color: var(--nav-button-background); /* Cor de fundo dos botões */
+    color: var(--nav-button-text-color); /* Cor do texto dos botões */
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
@@ -140,17 +205,18 @@ nav button {
 }
 
 nav button:hover {
-    background-color: #555; /* Cor ao passar o mouse */
+    background-color: var(--nav-button-hover-background); /* Cor ao passar o mouse */
 }
 
 label {
-    color: #e0e0e0; /* Cor do texto do switch */
+    color: var(--label-text-color); /* Cor do texto do switch */
     margin-left: 10px;
 }
 
 input[type="checkbox"] {
     margin-right: 5px;
 }
+
 
 /* Ajuste o layout responsivo conforme necessário */
 @media (max-width: 768px) {

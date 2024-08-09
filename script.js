@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const feedbackElement = document.getElementById("feedback");
     const submitButton = document.getElementById("submit-answer");
     const congratulationsElement = document.getElementById("congratulations");
+    let tema = false;
 
     let currentQuestion = null;
     let correctAnswers = 0;
@@ -74,3 +75,19 @@ let sequence = [];
 
         // Gera uma sequência inicial ao carregar a página
         window.onload = generateSequence;
+
+        document.getElementById('theme-toggle').addEventListener('change', function() {
+            tema = true;
+            if(tema == true){
+            document.body.classList.toggle('dark-theme');
+            }
+        });
+
+        document.getElementById('theme-toggle2').addEventListener('change', function() {
+            tema = false;
+            if(tema == false){
+            document.body.classList.toggle('colorblind-theme');
+            }
+        });
+
+        

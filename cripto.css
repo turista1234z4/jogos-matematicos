@@ -1,143 +1,201 @@
 body {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .container {
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .container button {
-    max-width: 30%;
+  max-width: 30%;
 }
 
 .container input {
-    height: 50px;
+  height: 50px;
 }
 
 #coluna_tempo {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    text-align: center;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  text-align: center;
+  z-index: 100;
+  margin-top: 8%;
+  margin-right: 10px;
 
 }
 
 #coluna_pontos {
-    position: fixed;
-    top: 20px;
-    float: left;
+  position: fixed;
+  top: 20px;
+  float: left;
+  z-index: 100;
+  margin-top: 8%;
+  margin-left: 10px;
+  align-items: center;
 }
 
 #cronometro h1 {
-    font-size: 2em;
+  font-size: 2em;
 }
 
 #tempoFinal {
-    font-size: 1.5em;
-    margin-top: 10px;
+  font-size: 1.5em;
+  margin-top: 10px;
 }
 
 #alfabeto {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
 #respostaUsuario {
-    display: none;
+  display: none;
 }
 
 /* From Uiverse.io by elijahgummer */
 #botaoIniciar {
-    overflow: hidden;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #0f988e;
-    font-family: "Istok Web", sans-serif;
-    letter-spacing: 1px;
-    padding: 0 12px;
-    text-align: center;
-    width: 120px;
-    height: 40px;
-    font-size: 14px;
-    text-transform: uppercase;
-    font-weight: normal;
-    border-radius: 3px;
-    outline: none;
-    user-select: none;
-    cursor: pointer;
-    transform: translateY(0px);
-    position: relative;
-    box-shadow:
-        inset 0 30px 30px -15px rgba(255, 255, 255, 0.1),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.3),
-        inset 0 1px 20px rgba(0, 0, 0, 0),
-        0 3px 0 #0f988e,
-        0 3px 2px rgba(0, 0, 0, 0.2),
-        0 5px 10px rgba(0, 0, 0, 0.1),
-        0 10px 20px rgba(0, 0, 0, 0.1);
-    background: #15ccbe;
-    color: white;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
-    transition: 150ms all ease-in-out;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #0f988e;
+  font-family: "Istok Web", sans-serif;
+  letter-spacing: 1px;
+  padding: 0 12px;
+  text-align: center;
+  width: 120px;
+  height: 40px;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: normal;
+  border-radius: 3px;
+  outline: none;
+  user-select: none;
+  cursor: pointer;
+  transform: translateY(0px);
+  position: relative;
+  box-shadow:
+    inset 0 30px 30px -15px rgba(255, 255, 255, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3),
+    inset 0 1px 20px rgba(0, 0, 0, 0),
+    0 3px 0 #0f988e,
+    0 3px 2px rgba(0, 0, 0, 0.2),
+    0 5px 10px rgba(0, 0, 0, 0.1),
+    0 10px 20px rgba(0, 0, 0, 0.1);
+  background: #15ccbe;
+  color: white;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+  transition: 150ms all ease-in-out;
 }
 
 #botaoIniciar.icon {
-    margin-right: 8px;
-    width: 24px;
-    height: 24px;
-    transition: all 0.5s ease-in-out;
+  margin-right: 8px;
+  width: 24px;
+  height: 24px;
+  transition: all 0.5s ease-in-out;
 }
 
 #botaoIniciar:active {
-    transform: translateY(3px);
-    box-shadow:
-        inset 0 16px 2px -15px rgba(0, 0, 0, 0),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.15),
-        inset 0 1px 20px rgba(0, 0, 0, 0.1),
-        0 0 0 #0f988e,
-        0 0 0 2px rgba(255, 255, 255, 0.5),
-        0 0 0 rgba(0, 0, 0, 0),
-        0 0 0 rgba(0, 0, 0, 0);
+  transform: translateY(3px);
+  box-shadow:
+    inset 0 16px 2px -15px rgba(0, 0, 0, 0),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.15),
+    inset 0 1px 20px rgba(0, 0, 0, 0.1),
+    0 0 0 #0f988e,
+    0 0 0 2px rgba(255, 255, 255, 0.5),
+    0 0 0 rgba(0, 0, 0, 0),
+    0 0 0 rgba(0, 0, 0, 0);
 }
 
 #botaoIniciar:hover .text {
-    transform: translateX(80px);
+  transform: translateX(80px);
 }
 
 #botaoIniciar:hover .icon {
-    transform: translate(23px);
+  transform: translate(23px);
 }
 
 .text {
-    transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 #tempoEscolhido {
-    width: 150px;
-    border: 3px 3px 3px solid blue;
-    border-radius: 5%;
-    margin-bottom: 80px;
+  width: 150px;
+  border: 3px 3px 3px solid blue;
+  border-radius: 5%;
+  margin-bottom: 80px;
 }
 
 #tempoEscolhido .option-1 {
-    background-color: orange;
+  background-color: orange;
 }
 
 #tempoEscolhido .option-2 {
-    background-color: blue;
+  background-color: blue;
 }
 
 #tempoEscolhido .option-3 {
-    background-color: #018d09;
+  background-color: #018d09;
 }
 
 #tempoEscolhido option {
-    appearance: none;
+  appearance: none;
 
 }
+
+#botaoCancelar {
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#botaoVerificar {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.bolinha {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  align-items: center;
+
+}
+
+.bolinha h3 {
+  margin-top: 50%;
+}
+
+.ladinho {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.registro{
+  display: block;
+  background-color: white;
+  border-radius: 5%;
+  width: 90%;
+  height: 40%;
+}
+
+#sumiço, #sumiçar{
+  display: none;
+}
+@media screen {}

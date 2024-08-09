@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Criptograma Matemático</title>
     <link rel="stylesheet" href="cripto.css">
+    <link rel="stylesheet" href="style.css">
     <script>
+
         const palavras = ["MATEMATICA", "LIVRO", "AULA", "LOGICA", "ESTUDO", "SAPATO", "MESA", "QUADRADO"];
         let tempos = []; // Array para armazenar os tempos
         let palavraAtual = ""; // Armazena a palavra atual
@@ -39,6 +41,7 @@
             const palavraOriginal = document.getElementById("palavraOriginal").value;
             const resultado = respostaUsuario === palavraOriginal ? "Correto!" : "Incorreto. Tente novamente.";
             document.getElementById("resultado").innerText = resultado;
+            
 
             if (respostaUsuario === palavraOriginal) {
                 salvarTempo(); // Salva o tempo no histórico
@@ -49,6 +52,14 @@
 
         function iniciar() {
             const palavra = obterPalavraAleatoria();
+            document.getElementById("respostaUsuario").disabled = false;
+            document.getElementById("resultado").innerText = " ";
+            document.getElementById("tempoEscolhido").style.display = "none"
+            document.getElementById("sumiço").style.display = "block";
+            document.getElementById("sumiçar").style.display = "block"
+            document.getElementById("txt_h3").style.display = "none";
+
+
             palavraAtual = palavra; // Atualiza a palavra atual
             const palavraCodificada = codificarPalavra(palavra);
             document.getElementById("palavraCodificada").innerText = palavraCodificada.join(" | ");
@@ -85,19 +96,23 @@
             const minutos = Math.floor(segundos / 60);
             const segs = segundos % 60;
             return `${minutos.toString().padStart(2, '0')}:${segs.toString().padStart(2, '0')}`;
+
         }
 
         function atualizarExibicaoTimer() {
-            document.getElementById('cronometro').textContent = formatarTempo(tempoRestante);
+            document.getElementById('cronometro').innerHTML = `<h3>${formatarTempo(tempoRestante)}</h3>`;
         }
 
         function iniciarTimer() {
+            document.getElementById("botaoIniciar").style.display = "none";
+            document.getElementById("botaoCancelar").style.display = "inline";
+
             if (intervalo) {
                 clearInterval(intervalo); // Para o timer anterior, se existir
             }
             tempoRestante = tempoInicial;
             atualizarExibicaoTimer();
-            iniciar(); // Gera a primeira palavra
+            iniciar();
 
             intervalo = setInterval(() => {
                 tempoRestante--;
@@ -107,9 +122,28 @@
                     clearInterval(intervalo);
                     document.getElementById("resultado").innerText = "Tempo esgotado!";
                     document.getElementById("respostaUsuario").disabled = true;
+                    document.getElementById("botaoCancelar").style.display = "none";
+                    document.getElementById("botaoIniciar").style.display = "inline-flex"
                 }
             }, 1000);
         }
+
+        function cancelarTimer() {
+            clearInterval(intervalo);
+            document.getElementById("resultado").innerText = "Timer cancelado!";
+            document.getElementById("botaoCancelar").style.display = "none";
+            document.getElementById("botaoIniciar").style.display = "inline-flex";
+            document.getElementById("respostaUsuario").disabled = true;
+            document.getElementById("tempoEscolhido").style.display = "block"
+            document.getElementById("sumiço").style.display = "none"
+            document.getElementById("sumiçar").style.display = "none"
+            document.getElementById("dificuldade").style.display = "none"
+            document.getElementById("txt").style.display = "none"
+            document.getElementById("txt_h3").style.display = "inline";
+
+
+        }
+
 
         function salvarTempo() {
             const tempoDecorrido = tempoInicial - tempoRestante;
@@ -150,36 +184,75 @@
                 historicoDiv.innerHTML += `<p style="color: ${cor};">Palavra ${index + 1}: ${item.palavra} - Tempo: ${item.tempo}</p>`;
             });
 
-            pontosDiv.innerHTML = `<h2>${pontos}</h2>`; // Atualiza a pontuação total
+            pontosDiv.innerHTML = `<h2>${pontos}</h2>`;
         }
 
-        // Adiciona o evento para verificar a resposta quando a tecla Enter for pressionada
         document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("respostaUsuario").addEventListener("keyup", function (event) {
                 if (event.key === "Enter") {
                     verificarResposta();
                 }
             });
+
+            
+        document.getElementById('theme-toggle').addEventListener('change', function() {
+            tema = true;
+            if(tema == true){
+            document.body.classList.toggle('dark-theme');
+            }
         });
+
+        document.getElementById('theme-toggle2').addEventListener('change', function() {
+            tema = false;
+            if(tema == false){
+            document.body.classList.toggle('colorblind-theme');
+            }
+        });
+        });
+
     </script>
 </head>
 
 <body>
+    <div class="hub">
+        <h1>Hub de Jogos Matemáticos</h1>
+        <nav>
+            <a href="index.html">
+                <button>Mapa do Tesouro Matemático</button>
+                <button>Desafio de Qual o Próximo Número</button>
+            </a>
+
+            <a href="cripto.html"><button>Cripto Matemático</button></a>
+
+        </nav>
+
+     <label>
+            <input type="checkbox" id="theme-toggle"> Dark Mode
+            <input type="checkbox" id="theme-toggle2"> Daltonic Mode
+        </label>
+    </div>
+
     <div id="coluna_pontos">
+        <!--
         <h1>Pontuação</h1>
         <div id="pontos">
-            <h2>0</h2> <!-- Exibe a pontuação inicial -->
+            <h2>0</h2>
         </div>
+    -->
+
     </div>
 
     <div id="coluna_tempo">
-        <div id="cronometro"><h1>00:00</h1></div><br>
-        <div id="historicoTempos"></div>
+
+        <!--<div id="cronometro" class="container">
+            <h1>00:00</h1>
+        </div>-->
+
     </div>
 
     <div class="container">
         <h1>Criptograma Matemático</h1>
-        <h3>Escolha o tempo para jogar:</h3>
+        <h3 id="txt_h3">Escolha o tempo para jogar:</h3>
 
         <select id="tempoEscolhido">
             <option value="1" class="option-1">1 minuto</option>
@@ -187,36 +260,55 @@
             <option value="5" class="option-3">5 minutos</option>
         </select>
 
-
-<button id="botaoIniciar" onclick="definirTempo()">
-  <svg
-    class="icon"
-    id="Play"
-    viewBox="0 0 48 48"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      class="color000000 svgShape"
-      fill="#ffffff"
-      d="M12 39c-.549 0-1.095-.15-1.578-.447A3.008 3.008 0 0 1 9 36V12c0-1.041.54-2.007 1.422-2.553a3.014 3.014 0 0 1 2.919-.132l24 12a3.003 3.003 0 0 1 0 5.37l-24 12c-.42.21-.885.315-1.341.315z"
-    ></path>
-  </svg>
-  <span class="text">Inicar</span>
-</button>
+        <div class="ladinho">
+            <div id="cronometro" class="bolinha">
+                <h1>00:00</h1>
+            </div>
+            <h1>Pontuação</h1>
+            <div id="pontos" class="bolinha">
+                <h2>0</h2>
+            </div>
+        </div>
+        <button id="botaoCancelar" style="display: none;" onclick="cancelarTimer()">Cancelar</button>
+        <button id="botaoIniciar" onclick="definirTempo()">
+            <svg class="icon" id="Play" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path class="color000000 svgShape" fill="#ffffff"
+                    d="M12 39c-.549 0-1.095-.15-1.578-.447A3.008 3.008 0 0 1 9 36V12c0-1.041.54-2.007 1.422-2.553a3.014 3.014 0 0 1 2.919-.132l24 12a3.003 3.003 0 0 1 0 5.37l-24 12c-.42.21-.885.315-1.341.315z">
+                </path>
+            </svg>
+            <span class="text">Inicar</span>
+        </button>
 
         <p id="dificuldade"></p>
-        <h4 id="txt" style="display: none;">Decifre a palavra:</h4>
-        <h2 id="palavraCodificada"></h2>
+        <div class="registro" id="sumiço">
+
+            <h2 id="palavraCodificada"></h2>
+
+        </div>
         <input type="hidden" id="palavraOriginal">
         <input type="text" id="respostaUsuario" placeholder="Digite a palavra decodificada"><br>
         <p id="resultado"></p>
+        <button onclick="verificarResposta()" id="sumiçar">Verificar Resposta</button>
+        <h4 id="txt" style="display: none;">Decifre a palavra</h4>
+
+
+        <div id="alfabeto">
+            <strong>
+                <h2>A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</h2>
+            </strong>
+        </div>
+
+        <div class="registro">
+            <div id="historicoTempos"></div>
+
+        </div>
+
     </div>
 
-    <div id="alfabeto">
-        <strong>
-            <h2>A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</h2>
-        </strong>
-    </div>
+    <footer>
+        <p>&copy;2024 direitos de Manikas</p>
+    </footer>
 </body>
+
 
 </html>
