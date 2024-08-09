@@ -1,6 +1,7 @@
-body{
+body {
     justify-content: space-between;
 }
+
 .container {
     margin: auto;
     display: flex;
@@ -23,7 +24,8 @@ body{
     text-align: center;
 
 }
-#coluna_pontos{
+
+#coluna_pontos {
     position: fixed;
     top: 20px;
     float: left;
@@ -45,11 +47,12 @@ body{
     margin-top: 20px;
 }
 
-#respostaUsuario{
+#respostaUsuario {
     display: none;
 }
-/* From Uiverse.io by elijahgummer */ 
-#botaoIniciar{
+
+/* From Uiverse.io by elijahgummer */
+#botaoIniciar {
     overflow: hidden;
     display: inline-flex;
     align-items: center;
@@ -71,46 +74,70 @@ body{
     transform: translateY(0px);
     position: relative;
     box-shadow:
-      inset 0 30px 30px -15px rgba(255, 255, 255, 0.1),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.3),
-      inset 0 1px 20px rgba(0, 0, 0, 0),
-      0 3px 0 #0f988e,
-      0 3px 2px rgba(0, 0, 0, 0.2),
-      0 5px 10px rgba(0, 0, 0, 0.1),
-      0 10px 20px rgba(0, 0, 0, 0.1);
+        inset 0 30px 30px -15px rgba(255, 255, 255, 0.1),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.3),
+        inset 0 1px 20px rgba(0, 0, 0, 0),
+        0 3px 0 #0f988e,
+        0 3px 2px rgba(0, 0, 0, 0.2),
+        0 5px 10px rgba(0, 0, 0, 0.1),
+        0 10px 20px rgba(0, 0, 0, 0.1);
     background: #15ccbe;
     color: white;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
     transition: 150ms all ease-in-out;
-  }
-  
-  #botaoIniciar.icon {
+}
+
+#botaoIniciar.icon {
     margin-right: 8px;
     width: 24px;
     height: 24px;
     transition: all 0.5s ease-in-out;
-  }
-  
-  #botaoIniciar:active {
+}
+
+#botaoIniciar:active {
     transform: translateY(3px);
     box-shadow:
-      inset 0 16px 2px -15px rgba(0, 0, 0, 0),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.15),
-      inset 0 1px 20px rgba(0, 0, 0, 0.1),
-      0 0 0 #0f988e,
-      0 0 0 2px rgba(255, 255, 255, 0.5),
-      0 0 0 rgba(0, 0, 0, 0),
-      0 0 0 rgba(0, 0, 0, 0);
-  }
-  
-  #botaoIniciar:hover .text {
+        inset 0 16px 2px -15px rgba(0, 0, 0, 0),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.15),
+        inset 0 1px 20px rgba(0, 0, 0, 0.1),
+        0 0 0 #0f988e,
+        0 0 0 2px rgba(255, 255, 255, 0.5),
+        0 0 0 rgba(0, 0, 0, 0),
+        0 0 0 rgba(0, 0, 0, 0);
+}
+
+#botaoIniciar:hover .text {
     transform: translateX(80px);
-  }
-  #botaoIniciar:hover .icon {
+}
+
+#botaoIniciar:hover .icon {
     transform: translate(23px);
-  }
-  
-  .text {
+}
+
+.text {
     transition: all 0.5s ease-in-out;
-  }
-  
+}
+
+#tempoEscolhido {
+    width: 150px;
+    border: 3px 3px 3px solid blue;
+    border-radius: 5%;
+    margin-bottom: 80px;
+}
+
+#tempoEscolhido .option-1 {
+    background-color: orange;
+}
+
+#tempoEscolhido .option-2 {
+    background-color: blue;
+}
+
+#tempoEscolhido .option-3 {
+    background-color: #018d09;
+}
+
+#tempoEscolhido option {
+    appearance: none;
+
+}
