@@ -11,6 +11,8 @@
         let tempos = []; // Array para armazenar os tempos
         let palavraAtual = ""; // Armazena a palavra atual
         let tempoInicial = 60; // Tempo padrão em segundos (1 minuto)
+        let dificuldadeAtual = ""; // Variável para armazenar a dificuldade atual
+        let pontos = 0; // Variável para armazenar a pontuação
 
         function definirTempo() {
             const tempoEscolhido = document.getElementById("tempoEscolhido").value;
@@ -40,7 +42,7 @@
 
             if (respostaUsuario === palavraOriginal) {
                 salvarTempo(); // Salva o tempo no histórico
-                exibirHistorico(); // Exibe o histórico de tempos
+                exibirHistorico(); // Exibe o histórico de tempos e atualiza a pontuação
                 iniciar(); // Gera uma nova palavra automaticamente
             }
         }
@@ -54,23 +56,24 @@
             document.getElementById("txt").style.display = "block";
             document.getElementById("respostaUsuario").style.display = "block";
             document.getElementById("respostaUsuario").value = ""; // Limpa o campo de resposta
-            
-            const nivel = document.getElementById("dificuldade");
-            var pontuacao = document.getElementById('pontos');
 
+            const nivel = document.getElementById("dificuldade");
             if (palavra.length <= 4) {
                 nivel.innerHTML = "<strong><h2>Palavra de nível FÁCIL</h2></strong>";
                 nivel.style.color = "#018d09";
-                
+                dificuldadeAtual = "facil";
             } else if (palavra.length <= 7) {
                 nivel.innerHTML = "<strong><h2>Palavra de nível MÉDIO</h2></strong>";
                 nivel.style.color = "blue";
+                dificuldadeAtual = "medio";
             } else if (palavra.length <= 12) {
                 nivel.innerHTML = "<strong><h2>Palavra de nível DIFÍCIL</h2></strong>";
                 nivel.style.color = "orange";
+                dificuldadeAtual = "dificil";
             } else {
                 nivel.innerHTML = "<strong><h2>Palavra de nível IMPOSSÍVEL</h2></strong>";
                 nivel.style.color = "red";
+                dificuldadeAtual = "impossivel";
             }
         }
 
@@ -110,15 +113,44 @@
 
         function salvarTempo() {
             const tempoDecorrido = tempoInicial - tempoRestante;
-            tempos.push({ palavra: palavraAtual, tempo: formatarTempo(tempoDecorrido) });
+            tempos.push({
+                palavra: palavraAtual,
+                tempo: formatarTempo(tempoDecorrido),
+                dificuldade: dificuldadeAtual
+            });
         }
 
         function exibirHistorico() {
             const historicoDiv = document.getElementById('historicoTempos');
+            const pontosDiv = document.getElementById('pontos'); // Acessa o elemento de pontuação
+
             historicoDiv.innerHTML = "<h3>Histórico de Tempos:</h3>";
+            pontosDiv.innerHTML = ""; // Limpa o conteúdo anterior de pontuação
+
             tempos.forEach((item, index) => {
-                historicoDiv.innerHTML += `<p>Palavra ${index + 1}: ${item.palavra} - Tempo: ${item.tempo}</p>`;
+                let cor = "";
+                switch (item.dificuldade) {
+                    case "facil":
+                        cor = "#018d09";
+                        pontos += 3;
+                        break;
+                    case "medio":
+                        cor = "blue";
+                        pontos += 6;
+                        break;
+                    case "dificil":
+                        cor = "orange";
+                        pontos += 10;
+                        break;
+                    case "impossivel":
+                        cor = "red";
+                        pontos += 15;
+                        break;
+                }
+                historicoDiv.innerHTML += `<p style="color: ${cor};">Palavra ${index + 1}: ${item.palavra} - Tempo: ${item.tempo}</p>`;
             });
+
+            pontosDiv.innerHTML = `<h2>${pontos}</h2>`; // Atualiza a pontuação total
         }
 
         // Adiciona o evento para verificar a resposta quando a tecla Enter for pressionada
@@ -133,14 +165,16 @@
 </head>
 
 <body>
-    <div id="pontos">
-
+    <div id="coluna_pontos">
+        <h1>Pontuação</h1>
+        <div id="pontos">
+            <h2>0</h2> <!-- Exibe a pontuação inicial -->
+        </div>
     </div>
-
 
     <div id="coluna_tempo">
         <div id="cronometro"><h1>00:00</h1></div><br>
-        <div id="historicoTempos"></div> 
+        <div id="historicoTempos"></div>
     </div>
 
     <div class="container">
@@ -151,7 +185,30 @@
             <option value="3">3 minutos</option>
             <option value="5">5 minutos</option>
         </select>
-        <button onclick="definirTempo()" id="botaoIniciar">Iniciar</button>
+
+
+<button id="botaoIniciar" onclick="definirTempo()">
+  <svg
+    class="icon"
+    id="Play"
+    viewBox="0 0 48 48"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      class="color000000 svgShape"
+      fill="#ffffff"
+      d="M12 39c-.549 0-1.095-.15-1.578-.447A3.008 3.008 0 0 1 9 36V12c0-1.041.54-2.007 1.422-2.553a3.014 3.014 0 0 1 2.919-.132l24 12a3.003 3.003 0 0 1 0 5.37l-24 12c-.42.21-.885.315-1.341.315z"
+    ></path>
+  </svg>
+  <span class="text">Inicar</span>
+</button>
+
+        
+
+
+
+
+
         <p id="dificuldade"></p>
         <h4 id="txt" style="display: none;">Decifre a palavra:</h4>
         <h2 id="palavraCodificada"></h2>
