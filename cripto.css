@@ -1,3 +1,7 @@
+:root{
+  --cor_de_texto: #d55e00;
+}
+
 body {
   justify-content: space-between;
 }
@@ -171,7 +175,7 @@ body {
 .bolinha {
   width: 80px;
   height: 80px;
-  border-radius: 50%;
+  /*border-radius: 50%;*/
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   align-items: center;
 
@@ -198,4 +202,42 @@ body {
 #sumiço, #sumiçar{
   display: none;
 }
+
+.texto_alfabeto div{
+  display: none;
+  color: var(--cor_de_texto);
+}
+
+.mostrar_nmrs{
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+
+span{
+  display: inline;
+  min-width: 80%;
+  align-items: center;
+}
+
+span img{
+  margin-top: 10px;
+  max-width: 5%;
+  visibility: hidden;
+}
+
+#alfabeto{
+  width: 100%;
+  align-items: center;
+}
+
+.texto_alfabeto{
+  display: flex;
+  flex-wrap: wrap;
+}
+fieldset{
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
 @media screen {}

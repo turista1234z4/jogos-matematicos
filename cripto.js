@@ -5,6 +5,7 @@ let palavraAtual = ""; // Armazena a palavra atual
 let tempoInicial = 60; // Tempo padrão em segundos (1 minuto)
 let dificuldadeAtual = ""; // Variável para armazenar a dificuldade atual
 let pontos = 0; // Variável para armazenar a pontuação
+var i;
 
 function definirTempo() {
     const tempoEscolhido = document.getElementById("tempoEscolhido").value;
@@ -31,12 +32,12 @@ function verificarResposta() {
     const palavraOriginal = document.getElementById("palavraOriginal").value;
     const resultado = respostaUsuario === palavraOriginal ? "Correto!" : "Incorreto. Tente novamente.";
     document.getElementById("resultado").innerText = resultado;
-    
+
 
     if (respostaUsuario === palavraOriginal) {
-        salvarTempo(); // Salva o tempo no histórico
-        exibirHistorico(); // Exibe o histórico de tempos e atualiza a pontuação
-        iniciar(); // Gera uma nova palavra automaticamente
+        salvarTempo(); 
+        exibirHistorico(); 
+        iniciar(); 
     }
 }
 
@@ -48,15 +49,15 @@ function iniciar() {
     document.getElementById("sumiço").style.display = "block";
     document.getElementById("sumiçar").style.display = "block"
     document.getElementById("txt_h3").style.display = "none";
-
-
-    palavraAtual = palavra; // Atualiza a palavra atual
+    
+    palavraAtual = palavra; 
     const palavraCodificada = codificarPalavra(palavra);
     document.getElementById("palavraCodificada").innerText = palavraCodificada.join(" | ");
     document.getElementById("palavraOriginal").value = palavra;
     document.getElementById("txt").style.display = "block";
     document.getElementById("respostaUsuario").style.display = "block";
-    document.getElementById("respostaUsuario").value = ""; // Limpa o campo de resposta
+    document.getElementById("respostaUsuario").value = ""; 
+    indiceDica = 0;
 
     const nivel = document.getElementById("dificuldade");
     if (palavra.length <= 4) {
@@ -76,6 +77,17 @@ function iniciar() {
         nivel.style.color = "red";
         dificuldadeAtual = "impossivel";
     }
+    function geraDica() {
+        const digito = document.getElementById("respostaUsuario");
+        const palavra = document.getElementById("palavraOriginal").value;
+        
+        if (indiceDica < palavra.length) {
+            digito.value += palavra[indiceDica];
+            indiceDica++;
+        }
+}
+
+document.getElementById("btn_dica").addEventListener("click", geraDica);
 }
 
 // Timer regressivo
@@ -90,7 +102,7 @@ function formatarTempo(segundos) {
 }
 
 function atualizarExibicaoTimer() {
-    document.getElementById('cronometro').innerHTML = `<h3>${formatarTempo(tempoRestante)}</h3>`;
+    document.getElementById('cronometro').innerHTML = `<h2>${formatarTempo(tempoRestante)}</h2>`;
 }
 
 function iniciarTimer() {
@@ -174,8 +186,32 @@ function exibirHistorico() {
         historicoDiv.innerHTML += `<p style="color: ${cor};">Palavra ${index + 1}: ${item.palavra} - Tempo: ${item.tempo}</p>`;
     });
 
-    pontosDiv.innerHTML = `<h2>${pontos}</h2>`;
+    pontosDiv.innerHTML = `<h1>${pontos}</h1>`;
 }
+
+function geraNumeros() {
+    const alfabeto = document.querySelector(".texto_alfabeto");
+    const divs_alfbt = alfabeto.querySelectorAll("div");
+
+    divs_alfbt.forEach(div => {
+        // Verifica o estado atual de exibição e alterna
+        if (div.style.display === "none" || div.style.display === "") {
+            div.style.display = "inline";
+            document.getElementById("checked").style.visibility = "visible";
+        } else {
+            div.style.display = "none";
+            document.getElementById("checked").style.visibility = "hidden";
+
+        }
+    });
+}
+
+
+
+
+
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("respostaUsuario").addEventListener("keyup", function (event) {
@@ -184,18 +220,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    
-document.getElementById('theme-toggle').addEventListener('change', function() {
-    tema = true;
-    if(tema == true){
-    document.body.classList.toggle('dark-theme');
-    }
+
+    document.getElementById('theme-toggle').addEventListener('change', function () {
+        tema = true;
+        if (tema == true) {
+            document.body.classList.toggle('dark-theme');
+        }
+    });
+
+    document.getElementById('theme-toggle2').addEventListener('change', function () {
+        tema = false;
+        if (tema == false) {
+            document.body.classList.toggle('colorblind-theme');
+        }
+    });
 });
 
-document.getElementById('theme-toggle2').addEventListener('change', function() {
-    tema = false;
-    if(tema == false){
-    document.body.classList.toggle('colorblind-theme');
-    }
-});
-});
+document.getElementById("btn_some").addEventListener("click", geraNumeros);
