@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site de Jogos Matemáticos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="hub">
+        <h1>Hub de Jogos Matemáticos</h1>
+        <nav>
+            <button onclick="scrollToSection('mapa')">Mapa do Tesouro Matemático</button>
+            <button onclick="scrollToSection('sequencia')">Desafio de Qual o Próximo Número</button>
+            <a href="index.html"><button>Cripto Matemático</button></a>
+        </nav>
+        <label>
+            <input type="checkbox" id="theme-toggle"> Dark Mode
+            <input type="checkbox" id="theme-toggle2"> Daltonic Mode
+        </label>
+    </div>   
+    <div class="container">
+    <section id="mapa">
+        <h1>Mapa do Tesouro Matemático</h1>
+        <main>
+         
+            <div id="map">
+                <div class="location" data-question="2 + 2" data-answer="4">A</div>
+                <div class="location" data-question="3 * 3" data-answer="9">B</div>
+                <div class="location" data-question="5 - 2" data-answer="3">C</div>
+                <div class="location" data-question="5 - 2" data-answer="3">D</div>
+                <div class="location" data-question="5 - 2" data-answer="3">E</div>
+                <!-- Adicione mais locais conforme necessário -->
+            </div>
+            <div id="question-area">
+                <p id="question"></p>
+                <input type="text" id="answer" placeholder="Sua resposta">
+                <button id="submit-answer">Enviar</button>
+            </div>
+            <p id="feedback"></p>
+            <p id="congratulations">Parabéns! Você completou todas as perguntas!</p>
+    
+        </main>
+       
+    </section> 
+ </div>
+    <section id="sequencia">
+        <div class="container">
+            <h1>Desafio de Qual o Próximo Número da Sequência</h1>
+            <div class="sequence" id="sequence"></div>
+            <div class="input-group">
+                <input type="number" id="guess" placeholder="Digite o próximo número">
+                <button onclick="checkGuess()">Verificar</button>
+            </div>
+            <div class="message" id="message"></div>
+            <button onclick="generateSequence()">Nova Sequência</button>
+        </div>
+    
+    </section>
+    <footer>
+        <p>&copy;2024 direitos de Manikas</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

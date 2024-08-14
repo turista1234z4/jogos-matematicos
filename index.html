@@ -1,67 +1,173 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site de Jogos Matemáticos</title>
+    <title>Criptograma Matemático</title>
+    <link rel="stylesheet" href="cripto.css">
     <link rel="stylesheet" href="style.css">
+    <script src="cripto.js" defer></script>
 </head>
+
 <body>
-    
     <div class="hub">
         <h1>Hub de Jogos Matemáticos</h1>
         <nav>
-            <button onclick="scrollToSection('mapa')">Mapa do Tesouro Matemático</button>
-            <button onclick="scrollToSection('sequencia')">Desafio de Qual o Próximo Número</button>
-            <a href="cripto.html"><button>Cripto Matemático</button></a>
+            <a href="hub.html">
+                <button>Mapa do Tesouro Matemático</button>
+                <button>Desafio de Qual o Próximo Número</button>
+            </a>
+
+            <a href="index.html"><button>Cripto Matemático</button></a>
+
         </nav>
+
         <label>
             <input type="checkbox" id="theme-toggle"> Dark Mode
             <input type="checkbox" id="theme-toggle2"> Daltonic Mode
         </label>
-    </div>   
-    <div class="container">
-    <section id="mapa">
-        <h1>Mapa do Tesouro Matemático</h1>
-        <main>
-         
-            <div id="map">
-                <div class="location" data-question="2 + 2" data-answer="4">A</div>
-                <div class="location" data-question="3 * 3" data-answer="9">B</div>
-                <div class="location" data-question="5 - 2" data-answer="3">C</div>
-                <div class="location" data-question="5 - 2" data-answer="3">D</div>
-                <div class="location" data-question="5 - 2" data-answer="3">E</div>
-                <!-- Adicione mais locais conforme necessário -->
-            </div>
-            <div id="question-area">
-                <p id="question"></p>
-                <input type="text" id="answer" placeholder="Sua resposta">
-                <button id="submit-answer">Enviar</button>
-            </div>
-            <p id="feedback"></p>
-            <p id="congratulations">Parabéns! Você completou todas as perguntas!</p>
-    
-        </main>
-       
-    </section> 
- </div>
-    <section id="sequencia">
-        <div class="container">
-            <h1>Desafio de Qual o Próximo Número da Sequência</h1>
-            <div class="sequence" id="sequence"></div>
-            <div class="input-group">
-                <input type="number" id="guess" placeholder="Digite o próximo número">
-                <button onclick="checkGuess()">Verificar</button>
-            </div>
-            <div class="message" id="message"></div>
-            <button onclick="generateSequence()">Nova Sequência</button>
+    </div>
+
+    <div id="coluna_pontos">
+        <!--
+        <h1>Pontuação</h1>
+        <div id="pontos">
+            <h2>0</h2>
         </div>
-    
-    </section>
+    -->
+
+    </div>
+
+    <div id="coluna_tempo">
+
+        <!--<div id="cronometro" class="container">
+            <h1>00:00</h1>
+        </div>-->
+
+    </div>
+
+    <div class="container">
+        <h1>Criptograma Matemático</h1>
+        <h3 id="txt_h3">Escolha o tempo para jogar:</h3>
+
+        <select id="tempoEscolhido">
+            <option value="1" class="option-1">1 minuto</option>
+            <option value="3" class="option-2">3 minutos</option>
+            <option value="5" class="option-3">5 minutos</option>
+        </select>
+
+        <div class="ladinho">
+            <div id="cronometro" class="bolinha">
+                <h2>00:00</h2>
+            </div>
+            <h1>Pontuação</h1>
+            <div id="pontos" class="bolinha">
+                <h2>0</h2>
+            </div>
+        </div>
+        <button id="botaoCancelar" style="display: none;" onclick="cancelarTimer()">Cancelar</button>
+        <button id="botaoIniciar" onclick="definirTempo()">
+            <svg class="icon" id="Play" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path class="color000000 svgShape" fill="#ffffff"
+                    d="M12 39c-.549 0-1.095-.15-1.578-.447A3.008 3.008 0 0 1 9 36V12c0-1.041.54-2.007 1.422-2.553a3.014 3.014 0 0 1 2.919-.132l24 12a3.003 3.003 0 0 1 0 5.37l-24 12c-.42.21-.885.315-1.341.315z">
+                </path>
+            </svg>
+            <span class="text">Inicar</span>
+        </button>
+
+        <p id="dificuldade"></p>
+        <div class="registro" id="sumiço">
+
+            <h2 id="palavraCodificada"></h2>
+            <div class="Button" id="mensagem">Correto!</div>
+            <br>
+
+        </div>
+        <input type="hidden" id="palavraOriginal">
+        <input type="text" id="respostaUsuario" placeholder="Digite a palavra decodificada"><br>
+        <p id="resultado"></p>
+        <button onclick="verificarResposta()" id="sumiçar">Verificar Resposta</button>
+        <h4 id="txt" style="display: none;">Decifre a palavra</h4>
+
+        <div class="mostar_nmrs">
+            <button id="btn_some">Mostrar números</button><span><img src="assets/checked-success-svgrepo-com.png" alt=""
+                    id="checked"></span>
+            <button id="btn_dica">Dica</button>
+
+        </div>
+
+        <div id="alfabeto">
+            <strong>
+                <h2 class="texto_alfabeto">
+                    <fieldset>A <div> - 1</div>
+                    </fieldset>
+                    <fieldset>B <div> - 2</div>
+                    </fieldset>
+                    <fieldset>C <div> - 3</div>
+                    </fieldset>
+                    <fieldset>D <div> - 4</div>
+                    </fieldset>
+                    <fieldset>E <div> - 5</div>
+                    </fieldset>
+                    <fieldset>F <div> - 6</div>
+                    </fieldset>
+                    <fieldset>G <div> - 7</div>
+                    </fieldset>
+                    <fieldset>H <div> - 8</div>
+                    </fieldset>
+                    <fieldset>I <div> - 9</div>
+                    </fieldset>
+                    <fieldset>J <div> - 10</div>
+                    </fieldset>
+                    <fieldset>K <div> - 11</div>
+                    </fieldset>
+                    <fieldset>L <div> - 12</div>
+                    </fieldset>
+                    <fieldset>M <div> - 13</div>
+                    </fieldset>
+                    <fieldset>N <div> - 14</div>
+                    </fieldset>
+                    <fieldset>O <div> - 15</div>
+                    </fieldset>
+                    <fieldset>P <div> - 16</div>
+                    </fieldset>
+                    <fieldset>Q <div> - 17</div>
+                    </fieldset>
+                    <fieldset>R <div> - 18</div>
+                    </fieldset>
+                    <fieldset>S <div> - 19</div>
+                    </fieldset>
+                    <fieldset>T <div> - 20</div>
+                    </fieldset>
+                    <fieldset>U <div> - 21</div>
+                    </fieldset>
+                    <fieldset>V <div> - 22</div>
+                    </fieldset>
+                    <fieldset>W <div> - 23</div>
+                    </fieldset>
+                    <fieldset>X <div> - 24</div>
+                    </fieldset>
+                    <fieldset>Y <div> - 25</div>
+                    </fieldset>
+                    <fieldset>Z <div> - 26</div>
+                    </fieldset>
+                </h2>
+            </strong>
+        </div>
+
+
+        <div class="registro">
+            <div id="historicoTempos"></div>
+
+        </div>
+
+    </div>
+
     <footer>
         <p>&copy;2024 direitos de Manikas</p>
     </footer>
-
-    <script src="script.js"></script>
 </body>
+
+
 </html>

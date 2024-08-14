@@ -35,9 +35,15 @@ function verificarResposta() {
 
 
     if (respostaUsuario === palavraOriginal) {
-        salvarTempo(); 
-        exibirHistorico(); 
-        iniciar(); 
+        salvarTempo();
+        exibirHistorico();
+        iniciar();
+        var msg = document.getElementById("mensagem");
+        msg.style.display = "inline";
+
+        setTimeout(function() {
+            msg.style.display  = 'none';
+        }, 1000);
     }
 }
 
@@ -49,14 +55,16 @@ function iniciar() {
     document.getElementById("sumiço").style.display = "block";
     document.getElementById("sumiçar").style.display = "block"
     document.getElementById("txt_h3").style.display = "none";
-    
-    palavraAtual = palavra; 
+    document.getElementById("btn_some").style.display = "inline"
+    document.getElementById("btn_dica").style.display = "inline"
+
+    palavraAtual = palavra;
     const palavraCodificada = codificarPalavra(palavra);
     document.getElementById("palavraCodificada").innerText = palavraCodificada.join(" | ");
     document.getElementById("palavraOriginal").value = palavra;
     document.getElementById("txt").style.display = "block";
     document.getElementById("respostaUsuario").style.display = "block";
-    document.getElementById("respostaUsuario").value = ""; 
+    document.getElementById("respostaUsuario").value = "";
     indiceDica = 0;
 
     const nivel = document.getElementById("dificuldade");
@@ -80,14 +88,14 @@ function iniciar() {
     function geraDica() {
         const digito = document.getElementById("respostaUsuario");
         const palavra = document.getElementById("palavraOriginal").value;
-        
+
         if (indiceDica < palavra.length) {
             digito.value += palavra[indiceDica];
             indiceDica++;
         }
-}
+    }
 
-document.getElementById("btn_dica").addEventListener("click", geraDica);
+    document.getElementById("btn_dica").addEventListener("click", geraDica);
 }
 
 // Timer regressivo
@@ -126,6 +134,8 @@ function iniciarTimer() {
             document.getElementById("respostaUsuario").disabled = true;
             document.getElementById("botaoCancelar").style.display = "none";
             document.getElementById("botaoIniciar").style.display = "inline-flex"
+            document.getElementById("btn_some").style.display = "none"
+            document.getElementById("btn_dica").style.display = "none"
         }
     }, 1000);
 }
@@ -142,7 +152,8 @@ function cancelarTimer() {
     document.getElementById("dificuldade").style.display = "none"
     document.getElementById("txt").style.display = "none"
     document.getElementById("txt_h3").style.display = "inline";
-
+    document.getElementById("btn_some").style.display = "none"
+    document.getElementById("btn_dica").style.display = "none"
 
 }
 
