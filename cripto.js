@@ -4,7 +4,7 @@ let tempos = []; // Array para armazenar os tempos
 let palavraAtual = ""; // Armazena a palavra atual
 let tempoInicial = 60; // Tempo padrão em segundos (1 minuto)
 let dificuldadeAtual = ""; // Variável para armazenar a dificuldade atual
-let pontos = 0; // Variável para armazenar a pontuação
+var pontos = 0; // Variável para armazenar a pontuação
 var i;
 
 function definirTempo() {
@@ -67,7 +67,7 @@ function iniciar() {
     document.getElementById("respostaUsuario").value = "";
     indiceDica = 0;
 
-    const nivel = document.getElementById("dificuldade");
+    let nivel = document.getElementById("dificuldade");
     if (palavra.length <= 4) {
         nivel.innerHTML = "<strong><h2>Palavra de nível FÁCIL</h2></strong>";
         nivel.style.color = "#018d09";
@@ -136,6 +136,11 @@ function iniciarTimer() {
             document.getElementById("botaoIniciar").style.display = "inline-flex"
             document.getElementById("btn_some").style.display = "none"
             document.getElementById("btn_dica").style.display = "none"
+            document.getElementById("historicoPontos").innerHTML = `<h2>${pontos}<h2>`;
+            pontos = 0;
+            document.getElementById("pontos").innerHTML = `<h2>${pontos}<h2>`;
+
+
         }
     }, 1000);
 }
@@ -154,6 +159,9 @@ function cancelarTimer() {
     document.getElementById("txt_h3").style.display = "inline";
     document.getElementById("btn_some").style.display = "none"
     document.getElementById("btn_dica").style.display = "none"
+    document.getElementById("historicoPontos").innerHTML = `<h2>${pontos}<h2>`;
+    pontos = 0;
+    document.getElementById("pontos").innerHTML = `<h2>${pontos}<h2>`;
 
 }
 
@@ -179,19 +187,19 @@ function exibirHistorico() {
         switch (item.dificuldade) {
             case "facil":
                 cor = "#018d09";
-                pontos += 3;
+                pontos  += 3;
                 break;
             case "medio":
                 cor = "blue";
-                pontos += 6;
+                pontos  += 6;
                 break;
             case "dificil":
                 cor = "orange";
-                pontos += 10;
+                pontos  += 10;
                 break;
             case "impossivel":
                 cor = "red";
-                pontos += 16;
+                pontos  += 16;
                 break;
         }
         historicoDiv.innerHTML += `<p style="color: ${cor};">Palavra ${index + 1}: ${item.palavra} - Tempo: ${item.tempo}</p>`;
